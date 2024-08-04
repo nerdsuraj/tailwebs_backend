@@ -1,0 +1,12 @@
+[
+    {"name": "Suraj", "marks": 77, "subject": "English"},
+    {"name": "Amit", "marks": 85, "subject": "Math"},
+    {"name": "Priya", "marks": 92, "subject": "Science"},
+    {"name": "Ravi", "marks": 68, "subject": "History"},
+    {"name": "Neha", "marks": 74, "subject": "Geography"},
+    {"name": "Anjali", "marks": 89, "subject": "Physics"},
+    {"name": "Vikas", "marks": 79, "subject": "Chemistry"},
+    {"name": "Rohan", "marks": 81, "subject": "Biology"},
+    {"name": "Pooja", "marks": 88, "subject": "Computer Science"},
+    {"name": "Manish", "marks": 95, "subject": "English"}
+]
