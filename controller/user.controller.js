@@ -33,17 +33,18 @@ userCntrl.register = async(req, res) => {
 userCntrl.login = async(req, res) => {
     try {
         let reqBody = JSON.parse(JSON.stringify(req.body));
-        if(!reqBody.email && !reqBody.password){
+        if(!reqBody.username && !reqBody.password){
             return res.status(400).json({message: "Please provide email and password"});
         }
-        if(!reqBody.email){
+        if(!reqBody.username){
             return res.status(400).json({message: "Please provide email"});
         }
         if(!reqBody.password){
             return res.status(400).json({message: "Please provide password"});
         }
 
-        let user = await db_query.findOne(baseModel.user, {email: reqBody.email});
+        let user = await db_query.findOne(baseModel.user, {username: reqBody.username});
+        console.log("🚀 ~ userCntrl.login=async ~ user:", user)
         if(user){
             if(user.password === reqBody.password){
                 let apiKey = jwt.sign({ username: user.username,email:user.email }, "secretkey");
