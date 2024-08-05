@@ -11,7 +11,7 @@
 3. **Set Up Environment Variables:**
    - Create a `.env` file in the root directory of the project.
    - Add the necessary environment variables (`PORT` and `new_db`).
-
+   - actually i push the env file to the git so you will not get trouble.
 4. **Start the Server:**
    - Use `npm start` to start the server using nodemon.
    - The server will run on the port specified in the `.env` file (default is `4001`).
