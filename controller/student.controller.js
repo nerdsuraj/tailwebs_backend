@@ -20,12 +20,21 @@ student_cntrl.student_list = async (req, res) => {
 student_cntrl.student_create_update = async (req, res) => {
     try {
         let reqBody = JSON.parse(JSON.stringify(req.body));
+        console.log("🚀 ~ student_cntrl.student_create_update= ~ reqBody:", reqBody)
         if(reqBody.id){
                 let update_student = await db_query.findOneAndUpdateWithQuery(baseModel.student, { _id: new mongoose.Types.ObjectId(reqBody.id)},reqBody);
                 if (update_student) {
                     return res.status(200).json({ message: "Student updated successfully" ,data:update_student});
                 }
         }else{
+            if(reqBody.name && reqBody.subject){
+                let findOneStudent = await db_query.findOne(baseModel.student, { name: reqBody.name, subject: reqBody.subject });
+                if (findOneStudent) {
+                    findOneStudent = JSON.parse(JSON.stringify(findOneStudent));
+                    let update_student = await db_query.findOneAndUpdateWithQuery(baseModel.student,{ _id: new mongoose.Types.ObjectId(findOneStudent._id)}, reqBody);
+                    return res.status(200).json({ message: "Student updated successfully" ,data:update_student});
+                }
+            }
             let create_student = await db_query.createOne(baseModel.student, reqBody);
             if (create_student) {
                 return res.status(200).json({ message: "Student created successfully" ,data:create_student});

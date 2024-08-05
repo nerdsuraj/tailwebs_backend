@@ -33,6 +33,7 @@ userCntrl.register = async(req, res) => {
 userCntrl.login = async(req, res) => {
     try {
         let reqBody = JSON.parse(JSON.stringify(req.body));
+        console.log("🚀 ~ userCntrl.login=async ~ reqBody:", reqBody)
         if(!reqBody.username && !reqBody.password){
             return res.status(400).json({message: "Please provide email and password"});
         }
