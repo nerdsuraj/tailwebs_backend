@@ -39,24 +39,6 @@ controller.createOne = (model, document) => {
     }
 };
 
-controller.aggregateQuery = (model, pipeline, options) => {
-    try {
-        return model.aggregate(pipeline, options).allowDiskUse(true);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-controller.getDistinctValues = (model, query, keyName) => {
-    try {
-        let sortObj = {};
-        sortObj[keyName] = 1;
-        return model.find(query).distinct(keyName);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
 controller.findByIdAndUpdate = (model, docId, updateObj) => {
     try {
         return model.findByIdAndUpdate({ _id: new mongoose.Types.ObjectId(docId) }, { $set: updateObj });
@@ -82,66 +64,6 @@ controller.findOneAndUpdateWithQuery = (model, query, updateObjWithQuery) => {
     }
 }
 
-controller.update = (model, query, updateObj, options = {}) => {
-    try {
-        return model.update(query, { $set: updateObj, ...options }, { multi: true });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-controller.updateMultiFalse = (model, query, updateObj) => {
-    try {
-        return model.update(query, { $set: updateObj }, { multi: false });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-
-controller.updateWithQuery = (model, query, updateQuery) => {
-    try {
-        return model.updateMany(query, updateQuery, { multi: true });
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-controller.addOrUpdate = (model, query, updateObj) => {
-    try {
-        return model.update(
-            query, { $set: updateObj }, { multi: true, upsert: true }
-        );
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-controller.findWithSelection = (model, query, selection, limit, skip, sort) => {
-    try {
-        let queryObj = query || {};
-        let sortObj = sort || { _id:-1 };
-        let limitVal = limit || 100;
-        let skipVal = skip || 0;
-        selection = selection;
-        return model
-            .find(queryObj)
-            .select(selection)
-            .skip(skipVal)
-            .limit(limitVal)
-            .sort(sortObj);
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-controller.countDocuments = (model, query) => {
-    try {
-        return model.countDocuments(query);
-    } catch (error) {
-        console.log(error);
-    }
-};
 
 controller.createMany = (model, docArray) => {
     try {
@@ -158,12 +80,6 @@ controller.deleteOne = (model, query) => {
         console.log(error);
     }
 };
-controller.deleteMany = (model, query) => {
-    try {
-        return model.deleteMany(query);
-    } catch (error) {
-        console.log(error);
-    }
-};
+
 
 module.exports = controller;
